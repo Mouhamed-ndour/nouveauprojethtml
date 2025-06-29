@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentence Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 10px;
+    }
+    .result {
+      margin-top: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Sentence Analyzer</h2>
+  <p>Enter a sentence that ends with a period <strong>(e.g., "Hello world.")</strong></p>
+  
+  <input type="text" id="sentenceInput" placeholder="Type your sentence here...">
+  <button onclick="analyzeSentence()">Analyze</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function analyzeSentence() {
+      const sentence = document.getElementById("sentenceInput").value;
+
+      // Ensure the sentence ends with a period
+      if (!sentence || sentence.slice(-1) !== ".") {
+        alert("Please enter a sentence that ends with a period.");
+        return;
+      }
+
+      let charCount = 0;
+      let wordCount = 1; // start with 1 assuming words are separated by a single space
+      let vowelCount = 0;
+
+      const vowels = "aeiouAEIOU";
+
+      for (let i = 0; i < sentence.length; i++) {
+        const char = sentence[i];
+        charCount++;
+
+        if (char === " ") {
+          wordCount++;
+        }
+
+        if (vowels.includes(char)) {
+          vowelCount++;
+        }
+      }
+
+      document.getElementById("result").innerHTML = `
+        <strong>Results:</strong><br>
+        - Length of sentence: ${charCount}<br>
+        - Number of words: ${wordCount}<br>
+        - Number of vowels: ${vowelCount}
+      `;
+    }
+  </script>
+
+</body>
+</html>
